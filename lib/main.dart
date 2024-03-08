@@ -1,17 +1,27 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  double result = 0;
+  TextEditingController text = TextEditingController();
+  void increasement() {
+    setState(() {
+      result = double.parse(text.text) / 100;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    double result = 0;
-    TextEditingController text = TextEditingController();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -25,9 +35,9 @@ class MyApp extends StatelessWidget {
                     style:
                         TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 50),
-                const Text("' 0 B '",
-                    style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                Text("${result.toString()} B",
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold)),
                 const SizedBox(
                   height: 50,
                 ),
@@ -46,11 +56,7 @@ class MyApp extends StatelessWidget {
                   height: 30,
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      if (kDebugMode) {
-                        print(text.text);
-                      }
-                    },
+                    onPressed: increasement,
                     style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.blue),
                         foregroundColor: MaterialStatePropertyAll(Colors.white),
