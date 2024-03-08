@@ -10,6 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double result = 0;
+    TextEditingController text = TextEditingController();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -23,18 +25,21 @@ class MyApp extends StatelessWidget {
                     style:
                         TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 50),
-                const Text("' 0 '",
+                const Text("' 0 B '",
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                 const SizedBox(
                   height: 50,
                 ),
                 TextField(
+                  controller: text,
                   decoration: InputDecoration(
+                      suffixText: "MMK",
                       border: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.transparent, width: 0.0),
-                          borderRadius: BorderRadius.circular(5)),
+                        borderSide: const BorderSide(
+                            color: Colors.transparent, width: 0.0),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
                       hintText: "Add the amount you want to convert"),
                 ),
                 const SizedBox(
@@ -43,7 +48,7 @@ class MyApp extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       if (kDebugMode) {
-                        print("Clicked");
+                        print(text.text);
                       }
                     },
                     style: const ButtonStyle(
